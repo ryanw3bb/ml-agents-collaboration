@@ -1,22 +1,32 @@
 import numpy as np
-from ddpg_agent import Agent
+import torch.optim as optim
+import ddpg_agent as ddpg
+from ddpg_agent import Agent, ReplayBuffer
+from model import Actor, Critic
 
 class MADDPG():
     def __init__(self, state_size, action_size, num_agents, random_seed):
         self.state_size = state_size
         self.action_size = action_size
         self.num_agents = num_agents
+
+        # Actor Network (w/ Target Network)
+        self.actor_local = Actor(state_size, action_size, random_seed).to(ddpg.device)
+        self.actor_target = Actor(state_size, action_size, random_seed).to(ddpg.device)
+        self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=ddpg.LR_ACTOR)
+
+        # Critic Network (w/ Target Network)
+        self.critic_local = Critic(state_size, action_size, random_seed).to(ddpg.device)
+        self.critic_target = Critic(state_size, action_size, random_seed).to(ddpg.device)
+        self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=ddpg.LR_CRITIC, weight_decay=ddpg.WEIGHT_DECAY)
+
+        # Replay memory
+        self.memory = ReplayBuffer(action_size, ddpg.BUFFER_SIZE, ddpg.BATCH_SIZE, random_seed)
+
         self.agents = []
         for i in range(num_agents):
-            agent = Agent(state_size, action_size, random_seed)
+            agent = Agent(self, state_size, action_size, random_seed)
             self.agents.append(agent)
-            agent.critic_local = self.agents[0].critic_local
-            agent.critic_target = self.agents[0].critic_target
-            agent.critic_optimizer = self.agents[0].critic_optimizer
-            agent.actor_local = self.agents[0].actor_local
-            agent.actor_target = self.agents[0].actor_target
-            agent.actor_optimizer = self.agents[0].actor_optimizer
-            agent.memory = self.agents[0].memory
 
     def reset(self):
         for agent in self.agents:
