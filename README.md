@@ -35,5 +35,3 @@ The task is episodic, and in order to solve the environment, the agents must get
 With the environment activated run `train.py` to begin training. 
 
 The trained weights are saved to the files `checkpoint_actor.pth` and `checkpoint_critic.pth` once the required score is reached.
-
-Run `play.py` to watch an episode where smart agents play using the trained data.
