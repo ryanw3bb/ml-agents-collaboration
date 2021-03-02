@@ -23,6 +23,7 @@ class MADDPG():
         # Replay memory
         self.memory = ReplayBuffer(action_size, ddpg.BUFFER_SIZE, ddpg.BATCH_SIZE, random_seed)
 
+        # Create agents
         self.agents = []
         for i in range(num_agents):
             agent = Agent(self, state_size, action_size, random_seed)
