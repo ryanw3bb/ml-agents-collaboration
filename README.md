@@ -20,7 +20,7 @@ The task is episodic, and in order to solve the environment, the agents must get
     - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip)
     - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)
 
-3. Either navigate to the repository directory and activate a new environment with Python 3.6 or follow the instructions in [this repository](https://github.com/udacity/deep-reinforcement-learning#dependencies):
+3. Follow the instructions in [this repository](https://github.com/udacity/deep-reinforcement-learning#dependencies) or navigate to the repository directory to create and activate a new environment with Python 3.6:
     ```
     python -m venv venv
     .\venv\Scripts\activate
