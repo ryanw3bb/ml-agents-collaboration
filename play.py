@@ -29,21 +29,26 @@ agents = MADDPG(state_size=state_size, action_size=action_size, num_agents=num_a
 agents.actor_local.load_state_dict(torch.load('checkpoint_actor.pth'))
 agents.critic_local.load_state_dict(torch.load('checkpoint_critic.pth'))
 
-env_info = env.reset(train_mode=False)[brain_name]
-states = env_info.vector_observations
-agents.reset()
-scores = np.zeros(num_agents)
-while True:
-    actions = agents.act(states)
-    env_info = env.step(actions)[brain_name]
-    next_states = env_info.vector_observations
-    rewards = env_info.rewards
-    dones = env_info.local_done
-    states = next_states
-    scores += rewards
-    if np.any(dones):
-        break
 
-print('Agent won with score: {}'.format(np.max(scores)))
+def play(n_episodes=5):
+    for i_episode in range(1, n_episodes + 1):
+        env_info = env.reset(train_mode=False)[brain_name]
+        states = env_info.vector_observations
+        agents.reset()
+        scores = np.zeros(num_agents)
+        while True:
+            actions = agents.act(states)
+            env_info = env.step(actions)[brain_name]
+            next_states = env_info.vector_observations
+            rewards = env_info.rewards
+            dones = env_info.local_done
+            states = next_states
+            scores += rewards
+            if np.any(dones):
+                break
 
+        print('Agent won point with score: {}'.format(round(np.max(scores), 2)))
+
+
+play()
 env.close()

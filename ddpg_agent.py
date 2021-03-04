@@ -8,12 +8,12 @@ import torch.nn.functional as F
 
 BUFFER_SIZE = int(1e5)  # replay buffer size
 BATCH_SIZE = 128        # minibatch size
-GAMMA = 0.99            # discount factor
+GAMMA = 0.995           # discount factor
 TAU = 1e-3              # for soft update of target parameters
-LR_ACTOR = 5e-4         # learning rate of the actor
-LR_CRITIC = 5e-4        # learning rate of the critic
+LR_ACTOR = 1e-3         # learning rate of the actor
+LR_CRITIC = 1e-3        # learning rate of the critic
 WEIGHT_DECAY = 0        # L2 weight decay
-LEARN_EVERY = 20        # learning timestep interval
+LEARN_EVERY = 10        # learning timestep interval
 LEARN_SAMPLE = 10       # how many experiences to sample at each timestep
 SIGMA = 0.1             # Ornstein-Uhlenbeck noise volatility
 THETA = 0.15            # Ornstein-Uhlenbeck noise dissipation rate
@@ -150,7 +150,7 @@ class OUNoise:
     def sample(self):
         """Update internal state and return it as a noise sample."""
         x = self.state
-        dx = self.theta * (self.mu - x) + self.sigma * np.array(np.random.standard_normal(size=x.shape))
+        dx = self.theta * (self.mu - x) + self.sigma * np.array([random.random() for i in range(len(x))])
         self.state = x + dx
         return self.state
 

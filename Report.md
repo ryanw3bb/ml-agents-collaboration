@@ -35,12 +35,12 @@ Critic
 
 buffer_size = int(1e5)  
 batch_size = 128        
-gamma = 0.99           
+gamma = 0.995           
 tau = 1e-3             
-lr_actor = 5e-4        
-lr_critic = 5e-4       
+lr_actor = 1e-3        
+lr_critic = 1e-3     
 weight_decay = 0        
-learn_every = 20        
+learn_every = 10        
 learn_sample = 10       
 sigma = 0.1             
 theta = 0.15              
@@ -50,14 +50,18 @@ theta = 0.15
 ![results](images/final.png)
 
 Episode 100	Average Score: 0.00  
-Episode 200	Average Score: 0.15  
-Episode 300	Average Score: 0.11  
-Episode 400	Average Score: 0.06  
-Episode 500	Average Score: 0.05  
-Episode 600	Average Score: 0.02  
-Episode 700	Average Score: 0.43  
-Episode 709	Score: 1.20	Running Average: 0.50  
-Environment solved in 709 episodes!	Average Score: 0.50
+Episode 200	Average Score: 0.00  
+Episode 300	Average Score: 0.00  
+Episode 400	Average Score: 0.02  
+Episode 500	Average Score: 0.02  
+Episode 600	Average Score: 0.00  
+Episode 700	Average Score: 0.03  
+Episode 800	Average Score: 0.01  
+Episode 900	Average Score: 0.04  
+Episode 1000	Average Score: 0.09  
+Episode 1100	Average Score: 0.21  
+Episode 1141	Score: 2.60	Running Average: 0.51  
+Environment solved in 1141 episodes!	Average Score: 0.51  
 
 ## Future Work
 
